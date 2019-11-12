@@ -25,7 +25,9 @@ class Card extends React.Component {
       liked
     } = this.props;
     const handleClick = id => {
-      liked ? this.props.unLikeMovie(id) : this.props.likeMovie(id);
+      liked
+        ? this.props.unLikeMovie(id, this.props.title)
+        : this.props.likeMovie(id, this.props.title);
     };
     return (
       <div className="card">
@@ -71,8 +73,8 @@ class Card extends React.Component {
   }
 }
 const mapDispatchToProps = dispatch => ({
-  likeMovie: id => dispatch(likeMovie(id)),
-  unLikeMovie: id => dispatch(unLikeMovie(id))
+  likeMovie: (id, title) => dispatch(likeMovie(id, title)),
+  unLikeMovie: (id, title) => dispatch(unLikeMovie(id, title))
 });
 
 export default connect(

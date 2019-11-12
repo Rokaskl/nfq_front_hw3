@@ -20,7 +20,8 @@ const initialStateOfCards = {
   genres: [],
   movies: [],
   currentType: "",
-  likedMovies: []
+  likedMovies: [],
+  logs: []
 };
 
 const cards = (state = initialStateOfCards, action) => {
@@ -29,7 +30,11 @@ const cards = (state = initialStateOfCards, action) => {
       return {
         ...state,
         movies: action.list,
-        currentType: "Most Popular"
+        currentType: "Most Popular",
+        logs: [
+          ...state.logs,
+          `${new Date().toLocaleString()} Aplikacija uzkrauta`
+        ]
       };
     case "setGenres":
       return {
@@ -40,18 +45,30 @@ const cards = (state = initialStateOfCards, action) => {
       return {
         ...state,
         movies: action.list,
-        currentType: action.genre
+        currentType: action.genre,
+        logs: [
+          ...state.logs,
+          new Date().toLocaleString() + ` Pakeistas zanras i ${action.genre}`
+        ]
       };
     case "likeMovie":
       return {
         ...state,
-        likedMovies: [...state.likedMovies, action.id]
+        likedMovies: [...state.likedMovies, action.id],
+        logs: [
+          ...state.logs,
+          new Date().toLocaleString() + ` uzdeta sirdele ${action.title}`
+        ]
       };
     case "unLikeMovie":
       var temp = state.likedMovies.filter(e => e !== action.id);
       return {
         ...state,
-        likedMovies: temp
+        likedMovies: temp,
+        logs: [
+          ...state.logs,
+          new Date().toLocaleString() + ` nuimta sirdele ${action.title}`
+        ]
       };
 
     default:

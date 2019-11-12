@@ -18,11 +18,13 @@ export const setMoviesByGenre = (genre, list) => ({
   genre,
   list
 });
-export const likeMovie = id => ({
+export const likeMovie = (id, title) => ({
   type: "likeMovie",
-  id
+  id,
+  title
 });
-export const unLikeMovie = id => ({
+export const unLikeMovie = (id, title) => ({
   type: "unLikeMovie",
-  id
+  id,
+  title
 });
